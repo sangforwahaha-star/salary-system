@@ -1,0 +1,81 @@
+// 移动端响应式断点系统
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+
+// 安全区域适配
+$safe-area-bottom: env(safe-area-inset-bottom, 0px);
+
+// 移动端混入
+@mixin mobile-only {
+  @media (max-width: #{$breakpoint-mobile - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media (min-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+// 触控优化
+@mixin touch-target($size: 44px) {
+  min-width: $size;
+  min-height: $size;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 移动端基础样式
+.mobile-container {
+  @include mobile-only {
+    padding: 16px;
+    padding-bottom: calc(16px + #{$safe-area-bottom});
+  }
+}
+
+.mobile-card {
+  @include mobile-only {
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+}
+
+// 响应式字体
+.mobile-title {
+  @include mobile-only {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.mobile-text {
+  @include mobile-only {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+// 响应式间距
+.mobile-spacing {
+  @include mobile-only {
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+  }
+  
+  @include tablet-up {
+    --spacing-xs: 12px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+  }
+}

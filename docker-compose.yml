@@ -1,0 +1,53 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: salary-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: salary_system
+      TZ: Asia/Shanghai
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - salary-network
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4'
+
+  backend:
+    build: ./backend
+    container_name: salary-backend
+    restart: always
+    environment:
+      PORT: 2890
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: salary_system
+      JWT_SECRET: ${JWT_SECRET}
+      CORS_ORIGIN: ${CORS_ORIGIN}
+      TZ: Asia/Shanghai
+    depends_on:
+      - mysql
+    networks:
+      - salary-network
+
+  frontend:
+    build: ./frontend
+    container_name: salary-frontend
+    restart: always
+    ports:
+      - "2890:80"
+    depends_on:
+      - backend
+    networks:
+      - salary-network
+
+volumes:
+  mysql_data:
+
+networks:
+  salary-network:
+    driver: bridge
