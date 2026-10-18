@@ -154,10 +154,10 @@ case "$1" in
         
         log_info "重置管理员密码..."
         docker exec salary-mysql mysql -uroot -p"${DB_PASSWORD}" salary_system << 'SQL'
-UPDATE users SET password_hash = '$2a$10$8brbNIaD42z7Vk0mY.N9OuTtZaBscqgiJHRXDwuUOJatUnxpYOzO6', must_change_password = 0 WHERE employee_no = 'ADMIN001';
+UPDATE users SET password_hash = '$2a$10$n6KUWgcXLNa/.JccpInB5eSNV0qxPyddkDEInqW5dVvNVQkBhpAcm', must_change_password = 1 WHERE employee_no = 'ADMIN001';
 SQL
         
-        log_success "管理员密码已重置为：Salary2024!"
+        log_success "管理员密码已重置为：admin123"
         ;;
     
     "shell")

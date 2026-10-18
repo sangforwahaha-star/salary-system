@@ -32,10 +32,10 @@ sudo ./install.sh
 访问地址：http://<服务器IP>:2890
 
 默认账号：
-  - 管理员：系统管理员 / Salary2024!
-  - 员工：陈薇 / Salary2024!
-  - 员工：李涛 / Salary2024!
-  - 员工：冯伟 / Salary2024!
+  - 管理员：ADMIN001 / admin123
+  - 员工：EMP005 / 123456（陈薇）
+  - 员工：EMP006 / 123456（李涛）
+  - 员工：EMP008 / 123456（冯伟）
 ```
 
 ---
@@ -236,8 +236,8 @@ sudo firewall-cmd --reload
 # 进入 MySQL
 docker exec -it salary-mysql mysql -uroot -p<password> salary_system
 
-# 重置密码（新密码：Salary2024!）
-UPDATE users SET password_hash = '$2a$10$8brbNIaD42z7Vk0mY.N9OuTtZaBscqgiJHRXDwuUOJatUnxpYOzO6', must_change_password = 0 WHERE employee_no = 'ADMIN001';
+# 重置密码（新密码：admin123）
+UPDATE users SET password_hash = '$2a$10$n6KUWgcXLNa/.JccpInB5eSNV0qxPyddkDEInqW5dVvNVQkBhpAcm', must_change_password = 1 WHERE employee_no = 'ADMIN001';
 ```
 
 ---

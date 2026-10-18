@@ -327,15 +327,15 @@ CREATE TABLE IF NOT EXISTS import_records (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 初始管理员账号 (密码：Salary2024!)
+-- 初始管理员账号 (密码：admin123)
 INSERT INTO users (employee_no, name, department, password_hash, role, must_change_password) VALUES
-('ADMIN001', '系统管理员', '管理部', '$2a$10$8brbNIaD42z7Vk0mY.N9OuTtZaBscqgiJHRXDwuUOJatUnxpYOzO6', 'admin', 0);
+('ADMIN001', '系统管理员', '管理部', '$2a$10$n6KUWgcXLNa/.JccpInB5eSNV0qxPyddkDEInqW5dVvNVQkBhpAcm', 'admin', 1);
 
--- 示例员工账号 (密码均为：Salary2024!)
+-- 示例员工账号 (密码均为：123456)
 INSERT INTO users (employee_no, name, department, password_hash, role, must_change_password) VALUES
-('EMP005', '陈薇', '信息技术中心', '$2a$10$Rj6NWJauhmT6AQbdNx1F/uI3qiHJ3s8FDoru.KtPAbvu3Lvsw1Xn2', 'employee', 0),
-('EMP006', '李涛', '信息技术中心', '$2a$10$Rj6NWJauhmT6AQbdNx1F/uI3qiHJ3s8FDoru.KtPAbvu3Lvsw1Xn2', 'employee', 0),
-('EMP008', '冯伟', '信息技术中心', '$2a$10$Rj6NWJauhmT6AQbdNx1F/uI3qiHJ3s8FDoru.KtPAbvu3Lvsw1Xn2', 'employee', 0);
+('EMP005', '陈薇', '信息技术中心', '$2a$10$pD7vea4694wd9yzjNFf8BeKi3GKkl/ZPLuqlTYJtfEzzcR4zBMKk2', 'employee', 0),
+('EMP006', '李涛', '信息技术中心', '$2a$10$pD7vea4694wd9yzjNFf8BeKi3GKkl/ZPLuqlTYJtfEzzcR4zBMKk2', 'employee', 0),
+('EMP008', '冯伟', '信息技术中心', '$2a$10$pD7vea4694wd9yzjNFf8BeKi3GKkl/ZPLuqlTYJtfEzzcR4zBMKk2', 'employee', 0);
 EOF
     
     log_success "数据库初始化脚本已创建"
@@ -405,10 +405,10 @@ show_deployment_info() {
     echo "  - 后端 API：http://${SERVER_IP}:2890/api"
     echo ""
     echo "默认账号："
-    echo "  - 管理员：系统管理员 / Salary2024!"
-    echo "  - 员工：陈薇 / Salary2024!"
-    echo "  - 员工：李涛 / Salary2024!"
-    echo "  - 员工：冯伟 / Salary2024!"
+    echo "  - 管理员：ADMIN001 / admin123"
+    echo "  - 员工：EMP005 / 123456（陈薇）"
+    echo "  - 员工：EMP006 / 123456（李涛）"
+    echo "  - 员工：EMP008 / 123456（冯伟）"
     echo ""
     echo "管理命令："
     echo "  cd /opt/salary"
